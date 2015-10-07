@@ -21,7 +21,7 @@ int main() {
 	s--, t--;
 
 	priority_queue<PII, vector<PII>, greater<PII> > Q;
-	vector<int> dist(N, INF), dad(N, -1);
+	vector<int> dist(N, INF);
 	Q.push(make_pair(0, s));
 	dist[s] = 0;
 	while (!Q.empty()) {
@@ -33,7 +33,6 @@ int main() {
 		for (vector<PII>::iterator it = edges[here].begin(); it != edges[here].end(); it++) {
 			if (dist[here] + it->first < dist[it->second]) {
 				dist[it->second] = dist[here] + it->first;
-				dad[it->second] = here;
 				Q.push(make_pair(dist[it->second], it->second));
 			}
 		}
