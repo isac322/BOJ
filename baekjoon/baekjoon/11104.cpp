@@ -1,21 +1,19 @@
 #include <cstdio>
-#include <algorithm>
-#include <bitset>
 
 using namespace std;
 
 int main() {
-	int t;
+	int t, n;
 	scanf("%d\n", &t);
 	char ch;
-	bitset<24> set;
 	while (t--) {
+		n = 0;
 		for (int i = 23; i >= 0; i--) {
+			n <<= 1;
 			ch = getchar();
-			if (ch == '0') set.reset(i);
-			else set.set(i);
+			n += ch - '0';
 		}
-		printf("%u\n", set.to_ulong());
+		printf("%d\n", n);
 		getchar();
 	}
 }
