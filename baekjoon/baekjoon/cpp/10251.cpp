@@ -1,36 +1,59 @@
 #include <cstdio>
+#include <algorithm>
 
 using namespace std;
 
-int T, M, N, L, G;
-int H[101][101], V[101][101], D[101][101][2][201];
+int n, m, l, g;
+short mapR[100][100], mapD[100][100];
+int dp[100][100][2][201];
+const int INF = 987654321;
+
+int solve(int r, int c, int k, bool right) {
+	if (r >= m || c >= n) return INF;
+	if (k < 0) return INF;
+
+	int &p = dp[r][c][right ? 1 : 0][k];
+	if (p != -1) return p;
+	p = INF;
+
+	if (r == m - 1 && c == n - 1) return p = k == 0 ? 0 : INF;
+
+	if (right) {
+		p = min(p, mapR[r][c] + solve(r, c + 1, k, true));
+		p = min(p, mapD[r][c] + solve(r + 1, c, k - 1, false));
+	}
+	else {
+		p = min(p, mapR[r][c] + solve(r, c + 1, k - 1, true));
+		p = min(p, mapD[r][c] + solve(r + 1, c, k, false));
+	}
+
+	return p;
+}
 
 int main() {
-	int i, j, k, l;
-	for (scanf("%d", &T); T--;) {
-		scanf("%d%d%d%d", &N, &M, &L, &G);
-		for (i = 1; i <= N; i++) for (j = 1; j < M; j++) scanf("%d", H[i] + j);
-		for (i = 1; i < N; i++) for (j = 1; j <= M; j++) scanf("%d", V[i] + j);
-		for (i = 1; i <= N; i++) for (j = 1; j <= M; j++) for (k = 0; k < 2; k++) for (l = 0; l < 201; l++) D[i][j][k][l] = G + 1;
-		D[1][1][0][0] = D[1][1][1][0] = 0;
-		int ans = 2e9;
-		for (i = 1; i <= N; i++) for (j = 1; j <= M; j++) for (l = 0; l < 201; l++) for (k = 0; k < 2; k++) if (D[i][j][k][l] <= G) {
+	int t;
+	scanf("%d", &t);
 
-			if (i == N && j == M) {
-				if (ans > l) ans = l;
-			}
-			if (l < 200 && D[i][j][!k][l + 1] > D[i][j][k][l])
-				D[i][j][!k][l + 1] = D[i][j][k][l];
-			if (k) {
-				if (j < M && D[i][j + 1][k][l] > D[i][j][k][l] + H[i][j])
-					D[i][j + 1][k][l] = D[i][j][k][l] + H[i][j];
-			}
-			else {
-				if (i < N && D[i + 1][j][k][l] > D[i][j][k][l] + V[i][j])
-					D[i + 1][j][k][l] = D[i][j][k][l] + V[i][j];
+	while (t--) {
+		scanf("%d%d%d%d", &m, &n, &l, &g);
+		for (int i = 0; i < m; i++) for (int j = 0; j < n - 1; j++) scanf("%hd", mapR[i] + j);
+		for (int i = 0; i < m - 1; i++) for (int j = 0; j < n; j++) scanf("%hd", mapD[i] + j);
+
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				fill_n(dp[i][j][0], n + m - 2, -1);
+				fill_n(dp[i][j][1], n + m - 2, -1);
 			}
 		}
-		if (ans < 2e9) printf("%d\n", (N + M - 2)*L + ans);
-		else puts("-1");
+
+		int turn = 0;
+		for (; turn < n + m - 2; turn++) {
+			if (solve(0, 0, turn, false) <= g || solve(0, 0, turn, true) <= g) {
+				printf("%d\n", turn + (n + m - 2)*l);
+				break;
+			}
+		}
+
+		if (turn == n + m - 2) puts("-1");
 	}
 }
