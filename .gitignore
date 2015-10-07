@@ -6,8 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-*.vcxproj
-*.vcxproj.filters
+*.vcxproj*
 *.sln
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -213,7 +212,3 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-*.filters
-*.vcxproj
-baekjoon/baekjoon/baekjoon.vcxproj
-baekjoon/baekjoon/baekjoon.vcxproj.filters
