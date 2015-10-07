@@ -215,3 +215,5 @@ _Pvt_Extensions/
 ModelManifest.xml
 *.filters
 *.vcxproj
+baekjoon/baekjoon/baekjoon.vcxproj
+baekjoon/baekjoon/baekjoon.vcxproj.filters
