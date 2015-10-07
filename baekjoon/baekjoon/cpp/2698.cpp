@@ -1,9 +1,8 @@
 #include <cstdio>
-#include <algorithm>
 
 using namespace std;
 
-long long dp[111][2][111];
+int dp[101][2][100];
 
 int main() {
 	int t;
@@ -22,6 +21,6 @@ int main() {
 	while (t--) {
 		int n, k;
 		scanf("%d%d", &n, &k);
-		printf("%lld\n", dp[n][0][k] + dp[n][1][k]);
+		printf("%d\n", dp[n][0][k] + dp[n][1][k]);
 	}
 }
