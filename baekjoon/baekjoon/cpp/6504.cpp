@@ -4,11 +4,11 @@
 using namespace std;
 
 const int fibonacci[] = { 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657 };
-int dp[25001];
+char dp[25001];
 int n;
 
-int solve(int val) {
-	int &p = dp[val];
+char solve(int val) {
+	char &p = dp[val];
 	if (p != -1) return p;
 
 	const int *searched = upper_bound(fibonacci, fibonacci + 23, val) - 1;
