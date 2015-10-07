@@ -1,56 +1,43 @@
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
 #include <algorithm>
-#include <limits>
+#include <cstring>
 
 using namespace std;
 
-int a, b, c;
-char str1[3002], str2[3002];
-int len1, len2;
+char str1[3001], str2[3001];
+int dp[3001][3001], a, b, c, len1, len2;
+bool visited[3001][3001];
 
-long long dp[3001][3001];
+int solve(int idx, int idx2) {
+	int &p = dp[idx][idx2];
+	if (visited[idx][idx2]) return p;
+	p = 0;
 
-long long solve(short Li, short Ri) {
-	long long &p = dp[Li][Ri];
-	if (p != -1) return p;
+	if (idx == len1 && idx2 == len2) return 0;
 
-	if (Li == len1 && Ri == len2) {
-		return p = 0;
+	if (idx != len1) {
+		p = solve(idx + 1, idx2) + b;
+		visited[idx][idx2] = true;
 	}
-
-	long long ret = numeric_limits<long long>::min();
-
-	if (Li != len1) {
-		ret = max(ret, solve(Li + 1, Ri) + b);
-	}
-
-	if (Ri != len2) {
-		ret = max(ret, solve(Li, Ri + 1) + b);
-	}
-
-	if (Li != len1 && Ri != len2) {
-		if (str1[Li] == str2[Ri]) {
-			ret = max(ret, solve(Li + 1, Ri + 1) + a);
-		}
+	if (idx2 != len2) {
+		if (visited[idx][idx2]) p = max(p, solve(idx, idx2 + 1) + b);
 		else {
-			ret = max(ret, solve(Li + 1, Ri + 1) + c);
+			visited[idx][idx2] = true;
+			p = solve(idx, idx2 + 1) + b;
 		}
 	}
+	if (idx != len1 && idx2 != len2) {
+		p = max(p, solve(idx + 1, idx2 + 1) + (str1[idx] == str2[idx2] ? a : c));
+	}
 
-	return p = ret;
+	return p;
 }
 
 int main() {
 	scanf("%d %d %d\n", &a, &b, &c);
-
 	gets(str1);
 	gets(str2);
-
 	len1 = strlen(str1);
 	len2 = strlen(str2);
-
-	for (int i = 0; i <= len1; i++) fill(dp[i], dp[i] + len2 + 1, -1);
-
-	printf("%lld\n", solve(0, 0));
+	printf("%d", solve(0, 0));
 }
