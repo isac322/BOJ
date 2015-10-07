@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cpp\11104.cpp" />
+    <ClCompile Include="cpp\1812.cpp" />
     <ClCompile Include="cpp\2698.cpp" />
     <ClCompile Include="cpp\5613.cpp" />
   </ItemGroup>
