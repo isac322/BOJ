@@ -1,24 +1,25 @@
-#include <stdio.h>
-#include <list>
-#include <algorithm>
-#include <iterator>
+#include <cstdio>
+#include <deque>
+
 using namespace std;
 
 int main() {
 	int n, m;
+	deque<int> st;
+
 	scanf("%d %d", &n, &m);
-	list<int> l;
-	for (int i = 0; i < n; i++) l.push_back(i + 1);
-	list<int>::iterator iter = l.begin();
-	while (!l.empty()) {
-		for (int i = 0; i < m - 1; i++) {
-			iter++;
-			if (iter == l.end()) iter = l.begin();
+	for (int i = m + 1; i <= n; i++) st.push_back(i);
+	for (int i = 1; i < m; i++) st.push_back(i);
+
+	printf("<%d", m);
+	for (int i = 1; i < n; i++) {
+		for (int j = 1; j < m; j++) {
+			st.push_back(st.front());
+			st.pop_front();
 		}
-		if (l.size() == n) printf("<%d", *iter);
-		else printf(", %d", *iter);
-		iter = l.erase(iter);
-		if (iter == l.end()) iter = l.begin();
+
+		printf(", %d", st.front());
+		st.pop_front();
 	}
-	printf(">\n");
+	putchar('>');
 }
