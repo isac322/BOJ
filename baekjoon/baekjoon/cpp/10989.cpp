@@ -4,7 +4,7 @@ using namespace std;
 
 int main() {
 	int arr[10001] = { 0 }, n, t;
-	int i = 0, j;
+	register int i = 0, j;
 	scanf("%d", &n);
 	for (; i < n; i++) {
 		scanf("%d", &t);
