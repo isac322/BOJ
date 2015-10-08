@@ -1,0 +1,1 @@
+main(i,a,t,s,m){scanf("%d",&a);while(a--){for(i=s=0,m=100;i<7;i++){scanf("%d",&t);if(!(t&1)){s+=t;if(t<m)m=t;}}printf("%d %d\n",s,m);}}

@@ -1,0 +1,1 @@
+main(c,i,j,a){for(scanf("%d",&c);c--&&scanf("%d",&a);puts(""))for(i=0;i<a;i++,puts(""))for(j=0;j<a;j++)printf("%c",!i||!j||j==a-1||i==a-1?35:74);}

@@ -1,0 +1,1 @@
+i,s;main(){char n[21];gets(n);for(;n[i];s+=n[i++])n[i]-=n[i]<91?64:96;for(i=2;i<=s;i++)if(!(s%i))break;printf("It is %sa prime word.",i<s?"not ":"");}

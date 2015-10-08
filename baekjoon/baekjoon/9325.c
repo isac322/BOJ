@@ -1,0 +1,1 @@
+main(a,b,s,t,f){for(scanf("%d",&t);t--;printf("%d\n",s))for(scanf("%d%d",&s,&f);f--;s+=a*b)scanf("%d%d",&a,&b);}

@@ -1,0 +1,1 @@
+main(a,b,c){while(1){scanf("%d%d%d",&a,&b,&c);if(!a&&!b&&!c)return;else if(b-a==c-b)printf("AP %d\n",c+c-b);else printf("GP %d\n",c*c/b);}}

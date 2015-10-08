@@ -1,0 +1,1 @@
+a,s;main(){while(~scanf("%d",&a))s+=a>40?a:40;printf("%d",s/5);}

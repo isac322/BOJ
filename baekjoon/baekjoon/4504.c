@@ -1,0 +1,1 @@
+main(a,b){scanf("%d",&a);while(scanf("%d",&b)){if(!b) break;printf("%d is %sa multiple of %d.\n",b,b%a?"NOT ":"",a);}}

@@ -1,0 +1,1 @@
+main(){puts("242\nisac322");}

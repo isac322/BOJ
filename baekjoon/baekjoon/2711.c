@@ -1,0 +1,1 @@
+main(t,a,i){char c[81];for(scanf("%d",&t);t--;puts(""))for(scanf("%d %s",&a,c),i=0;c[i];i++)if(a!=i+1)putchar(c[i]);}

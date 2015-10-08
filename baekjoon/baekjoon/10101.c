@@ -1,0 +1,1 @@
+main(a,b,c){scanf("%d%d%d",&a,&b,&c);if(a+b+c==180){if(a==b&&b==c)puts("Equilateral");else if(a==b||b==c||a==c)puts("Isosceles");else puts("Scalene");}else puts("Error");}

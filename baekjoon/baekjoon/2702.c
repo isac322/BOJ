@@ -1,0 +1,1 @@
+main(a,b,c,d){scanf("%d",&d);while(d--){scanf("%d%d",&a,&b);for(c=a>b?a:b;a%c||b%c;c--);printf("%d %d\n",a*b/c,c);}}

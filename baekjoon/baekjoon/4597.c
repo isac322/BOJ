@@ -1,0 +1,1 @@
+main(a,b){while(scanf("%c",&a)!='#'){if(a=='e'){if(b%2)putchar('1');else putchar('0');b=0;}else if(a=='o'){if(b%2)putchar('0');else	putchar('1');b=0;}else if(a=='#')break;else{putchar(a);b+=(a-'0');}}}

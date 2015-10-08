@@ -1,0 +1,1 @@
+main(){int a[100][100]={0},b,c,d,e,i,j,C=0;while(~scanf("%d%d%d%d",&b,&c,&d,&e)){for(i=b;i<d;i++)for(j=c;j<e;j++)a[i][j]=1;}for(i=0;i<100;i++)for(j=0;j<100;j++)if(a[i][j])C++;printf("%d",C);}

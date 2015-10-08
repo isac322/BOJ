@@ -1,0 +1,1 @@
+main(long long a){scanf("%lld",&a);puts(!(a%5)||a%5==2?"CY":"SK");}

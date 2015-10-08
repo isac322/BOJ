@@ -1,0 +1,1 @@
+main(a,b,c,d,e){b=1;c=d=0;for(;scanf("%c",&a),a!=10;){if(a==65){e=b;b=c;c=e;}else if(a==66){e=c;c=d;d=e;}else{e=b;b=d;d=e;}}if(b)puts("1");if(c)puts("2");if(d)puts("3");}

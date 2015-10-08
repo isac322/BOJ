@@ -1,0 +1,1 @@
+main(a,b){char c[][9]={"factor","multiple","neither"};for(;scanf("%d%d",&a,&b),a;){puts(c[a%b?b%a?2:0:1]);}}

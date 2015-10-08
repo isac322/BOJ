@@ -1,0 +1,1 @@
+main(a,b,v,n){scanf("%d%d%d",&a,&b,&v);n=(v-a)/(a-b);if((v-a)%(a-b))n++;n++;printf("%d",n);}

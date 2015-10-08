@@ -1,0 +1,1 @@
+main(a,n,t){for(scanf("%d",&a);a--;){int m=99,M=0;for(scanf("%d",&n);n--;){scanf("%d",&t);m=m>t?t:m;M=M<t?t:M;}printf("%d\n",(M-m)*2);}}

@@ -1,0 +1,1 @@
+main(l,a,b,c,d){scanf("%d%d%d%d%d",&l,&a,&b,&c,&d);a=(a+c-1)/c;b=(b+d-1)/d;printf("%d",l-(a>b?a:b));}

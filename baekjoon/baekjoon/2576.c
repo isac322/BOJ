@@ -1,0 +1,1 @@
+main(a,b,c,d){c=0;d=100;for(a=0;a<7;a++){scanf("%d",&b);if(b%2){if(d>b)d=b;c+=b;}}c?printf("%d\n%d",c,d):printf("-1");}

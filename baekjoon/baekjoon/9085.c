@@ -1,0 +1,1 @@
+main(a,b,c,d){for(scanf("%d",&a);a--;printf("%d\n",c))for(scanf("%d",&b),c=0;b--&&scanf("%d",&d);c+=d);}

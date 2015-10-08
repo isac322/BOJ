@@ -1,0 +1,1 @@
+main(o,c,i,u){char s[81];for(scanf("%d\n",&o);o--&&gets(s);printf("%d\n",u))for(c=u=i=0;s[i];i++,u+=c)c=s[i]=='O'?c+1:0;}

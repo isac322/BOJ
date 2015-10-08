@@ -1,0 +1,2 @@
+#define CMP(X,Y) (X) < (Y) ? 0 : 1
+main(){int win[2],test,Test;char a,b;scanf("%d",&test);while(test--){win[0]=win[1]=0;scanf("%d",&Test);while(Test--){scanf("\n%c %c",&a,&b);if(a+b=='P'+'S')win[CMP(b,a)]++;else if(a==b)1;else win[CMP(a,b)]++;}printf("%s\n",win[0]>win[1]?"Player 1":win[0]==win[1]?"TIE":"Player 2");}}

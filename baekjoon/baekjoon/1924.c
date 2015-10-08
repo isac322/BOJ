@@ -1,0 +1,1 @@
+a,b,c;main(){char e[7][4]={"SUN","MON","TUE","WED","THU","FRI","SAT"},d[]={0,31,28,31,30,31,30,31,31,30,31,30,31};scanf("%d %d",&a,&b);while(a--)c+=d[a];c+=b;printf("%s",e[c%7]);}

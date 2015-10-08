@@ -1,0 +1,1 @@
+main(t,h,b){for(scanf("%d",&t);scanf("%d%d%d",&h,&b,&b),t;t--)printf("%d%02d\n",b%h?b%h:h,b/h+(b%h?1:0));}

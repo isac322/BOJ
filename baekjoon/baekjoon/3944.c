@@ -1,0 +1,11 @@
+#include<stdio.h>
+main(N,c,M,T){
+	scanf("%d",&M);
+	while(M--){
+		scanf("%d%c",&N,&c);
+		T=0;
+		while((c=getchar())!=10)
+			T+=(c-48);
+		printf("%d\n",T%(N-1));
+	}
+}

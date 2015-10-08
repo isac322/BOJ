@@ -1,0 +1,1 @@
+a,b,i,c[26],d;main(){while(1){a=getchar();if(a<65)break;if(a<97)a+=32;c[a-97]++;}for(i=0;i<26;i++){if(d<c[i]){d=c[i];b=i;}}for(i=0;i<26;i++){if(d==c[i]&&i!=b){putchar('?');return;}}printf("%c",b+65);}

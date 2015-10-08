@@ -1,0 +1,1 @@
+int a[20],b[20],i,j,n;int main(){scanf("%d",&n);a[0]=1;for(i=0;n;i++,n/=10){b[i]=n%10;a[i+1]=a[i]*b[i];}b[i]=1;j=i;for(;i>0;i--){b[i-1]*=b[i];}for(i++;i<j;i++){if(a[i]==b[i]){puts("YES");return 0;}}puts("NO");}

@@ -1,0 +1,1 @@
+i,m,c[10];char t[8];main(){gets(t);for(;t[i];)c[t[i++]-'0']++;c[6]=c[9]=(c[6]+c[9]+1)/2;for(i=0;i<10;i++)if(m<c[i])m=c[i];printf("%d",m);}

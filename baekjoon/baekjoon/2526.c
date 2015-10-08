@@ -1,0 +1,1 @@
+d[98],N,P,c,f=1;main(){scanf("%d%d",&N,&P);for(c=N%P;!d[c];c=(c*N)%P)d[c]=f++;printf("%d",f-d[c]);}

@@ -1,0 +1,1 @@
+a[5];cmp(const void *a,const void *b){return*(int*)a-*(int*)b;}main(i,t){scanf("%d",&t);while(t--){for(i=0;i<5;i++)scanf("%d",a+i);qsort(a,5,sizeof(int),cmp);if(a[3]-a[1]>3)puts("KIN");else printf("%d\n",a[1]+a[2]+a[3]);}}

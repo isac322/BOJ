@@ -1,0 +1,1 @@
+main(){int N,M,a,b,c=1000,d=1000;scanf("%d%d",&N,&M);while(M--){scanf("%d%d",&a,&b);c=c>b?b:c;d=d>a?a:d;}printf("%d",6*c<d?N*c:d<c*(N%6)?(N/6+1)*d:(N/6)*d+c*(N%6));}

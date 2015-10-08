@@ -1,0 +1,1 @@
+main(H,M,S,h,m,s,i,j,k){scanf("%d:%d:%d",&h,&m,&s);scanf("%d:%d:%d",&H,&M,&S);i=H*3600+M*60+S;j=h*3600+m*60+s;if(i<j)i+=24*3600;k=(i-j)%3600;printf("%02d:%02d:%02d",(i-j)/3600,k/60,k%60);}

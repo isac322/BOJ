@@ -1,0 +1,1 @@
+i;main(){char a[1000000];for(;~scanf("%s",a);i++);printf("%d",i);}

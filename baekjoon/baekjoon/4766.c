@@ -1,0 +1,1 @@
+main(){double c,e;for(scanf("%lf",&c);scanf("%lf",&e),e!=999;c=e)printf("%0.2lf\n",e-c);}

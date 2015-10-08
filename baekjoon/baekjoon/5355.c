@@ -1,0 +1,1 @@
+main(c,o){float n;for(scanf("%d",&c);c--;printf("%0.2f\n",n))for(scanf("%f",&n);getchar()!=10;)n=(o=getchar())==64?n*3:o==37?n+5:n-7;}

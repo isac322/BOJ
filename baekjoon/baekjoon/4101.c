@@ -1,0 +1,1 @@
+main(a,b){for(;scanf("%d%d",&a,&b),a;puts(a>b?"Yes":"No"));}
