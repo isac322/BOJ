@@ -37,7 +37,9 @@ int main() {
 			}
 		}
 
+		sort(sum1, sum1 + max);
 		sort(sum2, sum2 + max);
+
 
 		int min = 0x7fffffff;
 		int val = 0;
@@ -46,7 +48,6 @@ int main() {
 			int index = upper_bound(sum2, sum2 + max, find) - sum2;
 
 			int dif, re;
-            int tmp1, tmp2, tmp3;
 			if (index == max) index--;
 			
 			if (index == 0) {
@@ -55,18 +56,13 @@ int main() {
 			} else {
 				dif = find - sum2[index];
 				re = sum1[i] + sum2[index];
-                tmp1 = abs(dif);
-                tmp2 = find - sum2[index - 1];
-                tmp3 = abs(tmp2);
-				if (tmp1 > tmp3 || tmp1 == tmp3 && dif < tmp2) {
+				if ((abs(dif) > abs(find - sum2[index - 1])) || (abs(dif) == abs(find - sum2[index - 1]) && dif < find - sum2[index - 1])) {
 					dif = find - sum2[index - 1];
 					re = sum1[i] + sum2[index - 1];
 				}
 			}
 
-            tmp1 = abs(dif);
-            tmp2 = abs(min);
-			if (tmp1 < tmp2 || tmp1 == tmp2 && dif > min) {
+			if (abs(dif) < abs(min) || (abs(dif) == abs(min) && dif > min)) {
 				min = dif;
 				val = re;
 			}

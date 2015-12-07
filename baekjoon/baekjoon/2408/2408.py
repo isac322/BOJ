@@ -1,4 +1,4 @@
 t = ""
-for _ in range(2 * int(input()) - 1):
-	t += input()
-print(eval(t.replace('/', '//')))
+for _ in range(2 * input() - 1):
+	t += raw_input()
+print eval(t)

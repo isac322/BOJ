@@ -15,7 +15,7 @@ int main() {
 		for (int i = 0; i < n; i++) {
 			scanf("%d", &t);
 
-			vector<int>::iterator iter = lower_bound(arr.begin(), arr.end(), t);
+			auto iter = lower_bound(arr.begin(), arr.end(), t);
 			if (iter == arr.end()) arr.push_back(t);
 			else *iter = t;
 		}

@@ -45,15 +45,11 @@ vector<Node *> insert(Node* parents) {
 		return expand(parents);
 	}
 	else if (val == ')') {
-        vector<Node *> ret;
-        ret.push_back(parents);
-		return ret;
+		return vector<Node *>{parents};
 	}
 	else if (val == '|') {
 		str_index++;
-        vector<Node *> ret;
-        ret.push_back(parents);
-		return ret;
+		return vector<Node *>{parents};
 	}
 	else {
 		Node *root = new Node(pattern[str_index]);

@@ -21,10 +21,10 @@ int cmp(int pos, const char *str) {
 int main() {
 	int t;
 	char x[10], y[10], ch;
-	scanf("%d%", &t);
+	scanf("%d", &t);
 
 	while (t--) {
-		scanf("%d%d%", &n, &m);
+		scanf("%d%d", &n, &m);
 
 		for (int i = 0; i < m; i++) scanf("%hhd", x + i);
 		for (int i = 0; i < m; i++) scanf("%hhd", y + i);

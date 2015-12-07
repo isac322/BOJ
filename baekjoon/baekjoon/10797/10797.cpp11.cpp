@@ -12,7 +12,7 @@ int main() {
 		string st;
 		cin >> st;
 
-		if (*st.rbegin() == *day.rbegin()) cnt++;
+		if (st.back() == day.back()) cnt++;
 	}
 	cout << cnt;
 }

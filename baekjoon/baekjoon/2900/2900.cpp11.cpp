@@ -15,7 +15,7 @@ namespace itree {
 		return a + b;
 	}
 	
-	vector<val_t> itree(size * 2 + 1);
+	val_t itree[size * 2 + 1];
 	
 	void init() {
 		for (int i = 1; i <= size * 2; i++)
@@ -45,7 +45,7 @@ namespace itree {
 		}
 		return ret;
 	}
-}
+} // namespace itree
 
 int main() {
 	int n, k;
