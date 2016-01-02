@@ -1,0 +1,1 @@
+main(t,n,m){for(scanf("%d",&t);t--;printf("%d %d\n",m*2-n,n-m))scanf("%d%d",&n,&m);}

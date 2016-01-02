@@ -1,0 +1,1 @@
+l,c,i,s[101];main(){while(~scanf("%c",s+l++));for(l-=2;i<l/2;i++)if(s[i]!=s[l-i-1])c=1;putchar(49-c);}
