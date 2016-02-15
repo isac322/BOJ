@@ -1,0 +1,1 @@
+main(c){while((c=getchar())!=10)putchar((c-42)%26+65);}
