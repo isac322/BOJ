@@ -1,11 +1,10 @@
 #include <cstdio>
 #include <algorithm>
 #include <vector>
-#include <tr1/unordered_map>
+#include <unordered_map>
 #include <string>
 
 using namespace std;
-using namespace std::tr1;
 
 struct Team {
 	char univ[31], name[31];
@@ -24,7 +23,7 @@ int main() {
 	unordered_map<string, Team> ma;
 	for (int i = 0; i < n; i++) {
 		scanf("%s %s %d %d", &team[i].univ, &team[i].name, &team[i].solve, &team[i].penalty);
-		
+
 		Team &p = ma[string(team[i].univ)];
 		if (team[i] < p) p = team[i];
 	}
