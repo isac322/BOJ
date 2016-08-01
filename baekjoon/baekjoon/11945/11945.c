@@ -1,0 +1,1 @@
+char b[11];main(r,c,i){for(scanf("%d %d\n",&r,&c);r--;puts(b)){i=c;while(i--)b[i]=getchar();getchar();}}

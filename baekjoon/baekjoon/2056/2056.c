@@ -10,10 +10,11 @@ int n, max, tmp;
 
 int calc(int start) {
 	int max = 0, num;
-	check[start - 1] = 1;
+	if (nums[start - 1]) return nums[start - 1];
+	check[start - 1] = 01;
 	for (int i = 0; i < last[start - 1]; i++) {
 		check[arr[start - 1][i] - 1] = 1;
-		num = nums[arr[start - 1][i] - 1] ? nums[arr[start - 1][i] - 1] : calc(arr[start - 1][i]);
+		num = calc(arr[start - 1][i]);
 		if (num > max) max = num;
 	}
 	return nums[start - 1] = max + times[start - 1];
