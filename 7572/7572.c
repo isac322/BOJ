@@ -1,0 +1,1 @@
+main(y){scanf("%d",&y);y+=56;printf("%c%d",65+y%12,y%10);}

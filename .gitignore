@@ -212,3 +212,7 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+.git*
+*/9999.*
+*.VC.db

@@ -1,1 +1,0 @@
-main(n,i) {char a[99],b[99],c[99];for(scanf("%d",&n),i=0;i<n&&scanf("%s %s ",b,c);printf("%s %s %s\n",a,b,c),i++)gets(a);}
