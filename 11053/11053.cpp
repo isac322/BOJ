@@ -1,20 +1,17 @@
 #include <cstdio>
 #include <algorithm>
-#include <vector>
 
 using namespace std;
 
-int n, t;
-vector<int> arr;
+short n, dp1[1000], arr[1000], m = 0;
+
 int main() {
-	scanf("%d", &n);
-	for (int i = 0; i < n; i++) {
-		scanf("%d", &t);
-
-		vector<int>::iterator a = lower_bound(arr.begin(), arr.end(), t);
-		if (a == arr.end()) arr.push_back(t);
-		else *a = t;
+	scanf("%hd", &n);
+	for (short i = 0; i < n; i++) scanf("%hd", arr + i);
+	dp1[0] = 1;
+	for (short i = 1; i < n; i++) {
+		for (short j = i - 1; j >= 0; j--) if (arr[i] > arr[j]) dp1[i] = max(dp1[i], dp1[j]);
+		m = max(++dp1[i], m);
 	}
-
-	printf("%d", arr.size());
+	printf("%hd", m);
 }

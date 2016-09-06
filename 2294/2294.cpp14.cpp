@@ -4,8 +4,8 @@
 using namespace std;
 
 
+int n, k, dp[10'001] = { 0 }, coins[100];
 int main() {
-    int n, k, dp[100'001] = { 0 }, coins[100];
 	scanf("%d%d", &n, &k);
 	for (int i = 0; i < n; i++) scanf("%d", coins + i);
 	fill_n(dp + 1, k, 1987654321);

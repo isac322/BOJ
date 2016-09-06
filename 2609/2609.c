@@ -1,17 +1,1 @@
-#include <stdio.h>
-
-int main() {
-	unsigned int num1, num2;
-	unsigned int ucnum;
-
-	scanf("%d%d",&num1,&num2);
-
-	ucnum = num1>num2 ? num1 : num2;
-
-	for(; ucnum>0;--ucnum) {
-		if(num1%ucnum==0 && num2%ucnum==0) {
-			printf("%d\n%d",ucnum,num1*num2/ucnum);
-			break;
-		}
-	}
-}
+main(a,b,c){scanf("%d%d",&a,&b);for(c=a>b?a:b;a%c||b%c;c--);printf("%d\n%d",c,a*b/c);}

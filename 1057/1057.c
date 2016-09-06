@@ -1,8 +1,1 @@
-#include <stdio.h>
-
-int main() {
-	int a, b, i;
-	scanf("%d%d%d", &i, &a, &b);
-	for (i = 0; a != b; a = (a + 1) / 2, b = (b + 1) / 2, i++);
-	printf("%d", i);
-}
+a,b,i;main(){scanf("%d%d%d",&a,&a,&b);for(;a!=b;a++,b++,a/=2,b/=2,i++);printf("%d",i);}

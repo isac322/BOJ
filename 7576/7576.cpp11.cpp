@@ -21,34 +21,34 @@ int main() {
 	}
 	
 	int day = 0;
-	size_t size;
-	for (; size = que.size(); day++) {
-		while (size--) {
+	for (; !que.empty(); day++) {
+		
+		for (size_t i = que.size(); i--;) {
 			INTPAIR q = que.front();
 			que.pop();
 			int &r = q.first, &c = q.second;
 			
 			r--;
 			if (r >= 0 && map[r][c] == 0) {
-				que.emplace(q);
+				que.push(q);
 				map[r][c] = 1;
 			}
 			
 			r += 2;
 			if (r < n && map[r][c] == 0) {
-				que.emplace(q);
+				que.push(q);
 				map[r][c] = 1;
 			}
 			
 			r--, c--;
 			if (c >= 0 && map[r][c] == 0) {
-				que.emplace(q);
+				que.push(q);
 				map[r][c] = 1;
 			}
 			
 			c += 2;
 			if (c < m && map[r][c] == 0) {
-				que.emplace(q);
+				que.push(q);
 				map[r][c] = 1;
 			}
 		}

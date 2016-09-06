@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <memory.h>
 
 typedef struct {
 	char id;
@@ -23,10 +22,10 @@ int main() {
 	int T, i;
 	int teams, tests, id, m;
 	int t, n, s;
-	ID ids[101] = { { 0, { 0 }, { 0 }, 0, 0 } };
 
 	for (scanf("%d", &T); T--;) {
-		memset(ids, 0, sizeof(ID) * 101);
+		ID ids[101] = { { 0, { 0 }, { 0 }, 0, 0 } };
+
 		scanf("%d %d %d %d", &teams, &tests, &id, &m);
 		for (i = 0; i < m; i++) {
 			scanf("%d %d %d", &t, &n, &s);

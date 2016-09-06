@@ -1,12 +1,1 @@
-#include <stdio.h>
-
-int main() {
-	int a = 1, b = 0, t, i;
-	scanf("%d", &i);
-	while (i--) {
-		t = b;
-		b += a;
-		a = t;
-	}
-	printf("%d %d", a, b);
-}
+a=1,b,i;main(){scanf("%d",&i);while(i--){b+=a;a=b-a;}printf("%d %d",a,b);}

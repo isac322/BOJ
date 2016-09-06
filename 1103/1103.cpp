@@ -1,5 +1,4 @@
 #include <cstdio>
-#include <vector>
 #include <algorithm>
 
 using namespace std;
@@ -8,6 +7,8 @@ bool visited[50][50];
 char mat[50][51];
 char n, m;
 short dp[50][50];
+char dx[] = { 0,0,-1,1 };
+char dy[] = { -1,1,0,0 };
 
 short solve(char r, char c) {
 	if (r < 0 || r >= n || c < 0 || c >= m) return 0;
@@ -27,33 +28,14 @@ short solve(char r, char c) {
 		return p;
 	}
 
-	short ret = solve(r + v, c);
-	if (ret == -1) {
-		visited[r][c] = false;
-		return p = -1;
+	for (int i = 0; i < 4; i++) {
+		short ret = solve(r + dx[i] * v, c + dy[i] * v);
+		if (ret == -1) {
+			visited[r][c] = false;
+			return p = -1;
+		}
+		p = max(p, ret);
 	}
-	p = max(p, ret);
-
-	ret = solve(r - v, c);
-	if (ret == -1) {
-		visited[r][c] = false;
-		return p = -1;
-	}
-	p = max(p, ret);
-
-	ret = solve(r, c + v);
-	if (ret == -1) {
-		visited[r][c] = false;
-		return p = -1;
-	}
-	p = max(p, ret);
-
-	ret = solve(r, c - v);
-	if (ret == -1) {
-		visited[r][c] = false;
-		return p = -1;
-	}
-	p = max(p, ret);
 
 	visited[r][c] = false;
 	return ++p;

@@ -8,7 +8,7 @@ using namespace std;
 
 namespace ConvexHull {
 	struct Point {
-		long long x, y;
+		int x, y;
 		double angleInSin = 0.0;
 		
 		bool operator<(const Point &val) const {
@@ -18,7 +18,7 @@ namespace ConvexHull {
 		
 		Point() { }
 		
-		Point(long long x, long long y) : x(x), y(y) { }
+		Point(int x, int y) : x(x), y(y) { }
 		
 		Point(const Point &val) : x(val.x), y(val.y), angleInSin(val.angleInSin) { }
 	};
@@ -33,7 +33,9 @@ namespace ConvexHull {
 	}
 	
 	inline long long ccw(const Point &a, const Point &b, const Point &c) {
-		return b.x * c.y - c.x * b.y - (a.x * c.y - c.x * a.y) + a.x * b.y - b.x * a.y;
+		long long x1 = a.x, x2 = b.x, x3 = c.x;
+		
+		return x2 * c.y - x3 * b.y - (x1 * c.y - x3 * a.y) + x1 * b.y - x2 * a.y;
 	}
 	
 	vector<Point *> hull;
@@ -68,8 +70,7 @@ namespace ConvexHull {
 using namespace ConvexHull;
 
 long long dist(const Point *const s, const Point *const e) {
-	long long a = (s->x - e->x), b = (s->y - e->y);
-	return a * a + b * b;
+	return (long long) (s->x - e->x) * (s->x - e->x) + (long long) (s->y - e->y) * (s->y - e->y);
 }
 
 int main() {
@@ -80,7 +81,7 @@ int main() {
 		scanf("%d", &n);
 		
 		points.resize(n);
-		for (int i = 0; i < n; i++) scanf("%lld%lld", &points[i].x, &points[i].y);
+		for (int i = 0; i < n; i++) scanf("%d%d", &points[i].x, &points[i].y);
 		
 		convex_hull();
 		
@@ -98,6 +99,6 @@ int main() {
 			e_index++;
 		}
 		
-		printf("%lld %lld %lld %lld\n", s->x, s->y, e->x, e->y);
+		printf("%d %d %d %d\n", s->x, s->y, e->x, e->y);
 	}
 }

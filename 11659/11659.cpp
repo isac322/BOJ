@@ -11,17 +11,13 @@ int init(int node, int start, int end) {
 
 	if (start == end) return p = arr[start - 1];
 
-    int half = (start + end) >> 1, no = node << 1;
-	return p = init(no, start, half) + init(no + 1, half + 1, end);
+	return p = init(node * 2, start, (start + end) / 2) + init(node * 2 + 1, (start + end) / 2 + 1, end);
 }
 
 int get(int node, int left, int right) {
 	if (left > b || right < a) return 0;
 	else if (a <= left && right <= b) return tree[node];
-	else {
-		int half = (left + right) >> 1, no = node << 1;
-		return get(no, left, half) + get(no + 1, half + 1, right);
-    }
+	else return get(node * 2, left, (left + right) / 2) + get(node * 2 + 1, (left + right) / 2 + 1, right);
 }
 
 int main() {

@@ -1,4 +1,3 @@
-#include <stack>
 #include <cstdio>
 #include <algorithm>
 
@@ -7,37 +6,34 @@ using namespace std;
 int map[100000];
 int t, n, cnt;
 bool inStack[100000], visit[100000];
+int root;
 
-inline void dfs(int idx) {
-	stack<int> s;
-	s.emplace(idx);
-	inStack[idx] = true;
+bool dfs(int here) {
+	if (visit[here]) return false;
+	inStack[here] = true;
 
-	while (!s.empty()) {
-		int here = s.top();
-		int next = map[here];
-
-		if (visit[next]) {
-			inStack[here] = false;
-			visit[here] = true;
-			s.pop();
-			cnt++;
-		}
-		else if (inStack[next]) {
-			while (s.top() != next) {
-				inStack[s.top()] = false;
-				visit[s.top()] = true;
-				s.pop();
-			}
-			visit[next] = true;
-			inStack[next] = false;
-			s.pop();
-		}
-		else {
-			s.emplace(next);
-			inStack[next] = true;
-		}
+	int next = map[here];
+	bool ret;
+	if (visit[next]) {
+		cnt++;
+		ret = false;
 	}
+	else if (inStack[next]) {
+		root = next;
+		ret = next != here;
+	}
+	else if (dfs(next)) {
+		ret = root != here;
+	}
+	else {
+		cnt++;
+		ret = false;
+	}
+
+	inStack[here] = false;
+	visit[here] = true;
+
+	return ret;
 }
 
 int main() {
@@ -52,7 +48,10 @@ int main() {
 		fill_n(visit, n, false);
 		cnt = 0;
 
-		for (int i = 0; i < n; i++) if (!visit[i]) dfs(i);
+		for (int i = 0; i < n; i++) {
+			root = n;
+			dfs(i);
+		}
 		printf("%d\n", cnt);
 	}
 }

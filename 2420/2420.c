@@ -1,6 +1,1 @@
-#include <stdio.h>
-main(){
-	long long a,b;
-	scanf("%lld %lld",&a,&b);
-	printf("%lld",a>b ? a-b:b-a);
-}
+main(a,b){scanf("%d%d",&a,&b);printf("%u",a>b?a-b:b-a);}

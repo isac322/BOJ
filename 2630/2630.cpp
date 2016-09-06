@@ -3,13 +3,13 @@
 
 using namespace std;
 
-int map[128][128];
+bool map[128][128];
 int n;
 
 typedef pair<int, int> INTP;
 
 INTP solve(int r, int c, int size) {
-	int start = map[r][c];
+	const bool &start = map[r][c];
 
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {
@@ -34,7 +34,9 @@ int main() {
 
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
-			scanf("%d", map[i] + j);
+			int t;
+			scanf("%d", &t);
+			map[i][j] = t ? 1 : 0;
 		}
 	}
 

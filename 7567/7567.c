@@ -1,15 +1,1 @@
-#include <stdio.h>
-main(){
-	char a,b;
-	int len=10;
-	a=getchar();
-	while(1){
-		b=getchar();
-		if(b<40) break;
-		len+=5;
-		if(a!=b)
-			len+=5;
-		a=b;
-	}
-	printf("%d",len);
-}
+main(a,b,c){for(c=0;(b=getchar())>39;a=b)c+=a-b?10:5;printf("%d",c);}

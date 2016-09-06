@@ -73,9 +73,7 @@ int main() {
 	int j = 0;
 	while (scanf("%d", &t), t) {
 		j++;
-		memset(check, 0, sizeof(int) *300001);
-		memset(val, 0, sizeof(int) * 300001);
-		memset(cost, 0, sizeof(int) *300001);
+		memset(check, 0, sizeof(int) *t*3+1);
 		for (int i = 0; i < t; i++) {
 			scanf("%d %d %d", &cost[i * 3], &cost[i * 3 + 1], &cost[i * 3 + 2]);
 		}

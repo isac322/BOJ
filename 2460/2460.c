@@ -1,11 +1,1 @@
-#include <stdio.h>
-main(){
-	int a,b,i,j=0,max=0;
-	for(i=0;i<10;i++){
-		scanf("%d %d",&a,&b);
-		j+=b-a;
-		if(j>max)
-			max=j;
-	}
-	printf("%d",max);
-}
+main(a,b,c,d,e){for(c=d=e=0;c<10;c++){scanf("%d %d",&a,&b);d+=b-a;e=d>e?d:e;}printf("%d",e);}

@@ -1,7 +1,1 @@
-main(int c) {
-    c = getchar();
-    if (c!=-1) {
-        putchar(c);
-        main(c);
-    }
-}
+main(c){while((c=getchar())!=-1)putchar(c);}

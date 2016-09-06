@@ -1,63 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct {
-	int num;
-	int vote;
-	int times;
-}Frame;
-
-int cmp(const void *a, const void *b) {
-	Frame f1 = *(Frame *)a;
-	Frame f2 = *(Frame *)b;
-	int tmp = f1.vote - f2.vote;
-	
-	if (!tmp) return f2.times - f1.times;
-	return tmp;
+typedef struct{
+	int c;
+	int d;
+	int e;
+}j;
+int l(const void *a,const void *b){
+	j p=*(j*)a;
+	j q=*(j*)b;
+	int o=p.d-q.d;
+	if(!o)return q.e-p.e;
+	return o;
 }
-
-int cmp1(const void *a, const void *b) {
-	return (*(Frame *)a).num - (*(Frame *)b).num;
+int m(const void *a,const void *b){return (*(j*)a).c-(*(j*)b).c;}
+void n(j *f,int d){
+	f->c=d;
+	f->e=0;
+	f->d=1;
 }
-
-void init(Frame *frame, int vote) {
-	frame->num = vote;
-	frame->times = 0;
-	frame->vote = 1;
-}
-
-int main(char args[], int argc) {
-	int frameNum = 0;
-	int voteNum = 0;
-	int vote = 0;
-	int i = 0, ck = 0;
-	Frame *frame = NULL;
-
-	scanf("%d\n%d", &frameNum, &voteNum);
-	frame = (Frame *)calloc(frameNum, sizeof(Frame));
-
-	while (voteNum--) {
-		scanf("%d", &vote);
-		qsort(frame, frameNum, sizeof(Frame), cmp);
-
-		for (ck = 0, i = 0; i < frameNum; i++) {
-			if (frame[i].num == vote) {
-				frame[i].vote++;
-				ck = 1;
+main(){
+	int g,h,d,i=0,k,ck;
+    j f[20]={0};
+	scanf("%d%d",&g,&h);
+	for(;i<h;i++){
+		scanf("%d",&d);
+		qsort(f,g,sizeof(j),l);
+		for(ck=0,k=0;k<g;k++){
+			if(f[k].c==d){
+				f[k].d++;
+				ck=1;
 				break;
 			}
 		}
-		if (!ck) {
-			init(frame, vote);
-		}
-
-		for (i = 0; i < frameNum; i++) {
-			frame[i].times++;
-		}
+		if(!ck)n(f,d);
+		for(k=0;k<g;k++)f[k].e++;
 	}
-
-	qsort(frame, frameNum, sizeof(Frame), cmp1);
-	for (i = 0; i < frameNum; i++) {
-		if(frame[i].num) printf("%d ", frame[i].num);
-	}
+	qsort(f,g,sizeof(j),m);
+	for(i=0;i<g;i++)if(f[i].c)printf("%d ",f[i].c);
 }

@@ -1,6 +1,6 @@
 #include <cstdio>
 
-int dp[15001] = { 0,1 };
+short dp[15001] = { 0,1 };
 
 int main() {
 	int n;
@@ -9,6 +9,6 @@ int main() {
 		scanf("%d", &n);
 		if (n == -1) break;
 
-		printf("%d\n", dp[n % 15000]);
+		printf("%hd\n", dp[n % 15000]);
 	}
 }

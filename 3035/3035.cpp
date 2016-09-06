@@ -1,21 +1,20 @@
 #include <cstdio>
 #include <algorithm>
-#include <string>
 
 using namespace std;
 
 int main() {
-	int r, c, zr, zc;
-	char t;
-	string str;
+	int r, c, zr, zc, len;
+	char t, str[250];
 	scanf("%d %d %d %d\n", &r, &c, &zr, &zc);
 	for (int i = 0; i < r; i++) {
-		str.clear();
+		len = 0;
 		for (int j = 0; j < c; j++) {
 			t = getchar();
-			for (int l = 0; l < zc; l++) str.push_back(t);
+			for (int l = 0; l < zc; l++) str[len++] = t;
 		}
-		for (int j = 0; j < zr; j++) puts(str.c_str());
+		str[len] = 0;
+		for (int j = 0; j < zr; j++) puts(str);
 		getchar();
 	}
 }

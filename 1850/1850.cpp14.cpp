@@ -1,5 +1,7 @@
 #include <cstdio>
+#include <cstring>
 
+char str[5000001];
 int main() {
 	unsigned long long a, b, c;
 	scanf("%llu %llu", &a, &b);
@@ -8,5 +10,6 @@ int main() {
 		a = b;
 		b = c;
 	}
-	while (a--) putchar('1');
+	memset(str, '1', a);
+	puts(str);
 }

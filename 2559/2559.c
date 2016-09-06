@@ -4,14 +4,14 @@
 #define TRUE 1
 #define FALSE 0
 
-int *memAlloc(int size) ;
-char memDel(int *ptr) ;
+char *memAlloc(int size) ;
+char memDel(char *ptr) ;
 
 int main() {
 	int num, cntNum, sum = 0, maxNum = 0 ;
 	int ret ;
 	int i ;
-	int *input = NULL ;
+	char *input = NULL ;
 
 	scanf("%d %d", &num, &cntNum) ;
 
@@ -40,17 +40,17 @@ int main() {
 	input = NULL ;
 }
 
-int *memAlloc(int size) {
-	int *ptr = NULL ;
+char *memAlloc(int size) {
+	char *ptr = NULL ;
 
 	if(!ptr) {
-		ptr = (int *)malloc(sizeof(int) * size) ;
+		ptr = (char *)malloc(sizeof(char) * size) ;
 		return ptr;
 	} else
 		return NULL ;
 }
 
-char memDel(int *ptr) {
+char memDel(char *ptr) {
 	if(!ptr) {
 		free(ptr) ;
 		return TRUE ;

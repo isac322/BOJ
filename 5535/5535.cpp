@@ -12,7 +12,7 @@ int d, n;
 char days[200];
 int dp[200][101];
 
-int solve(short day, short prev) {
+int solve(int day, int prev) {
 	if (day == d) return 0;
 
 	int &ret = dp[day][prev];

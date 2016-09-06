@@ -12,7 +12,7 @@ int main() {
 	while (n--) {
 		set.reset();
 
-		while ((ch = getchar()) != 10) if (isalpha(ch)) set.set(tolower(ch) - 'a');
+		while ((ch = getchar()) != 10) if (isalpha(ch)) set[tolower(ch) - 'a'] = true;
 
 		if (set.count() == 26) puts("pangram");
 		else {
