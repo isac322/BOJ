@@ -1,0 +1,1 @@
+main(w,c){for(;(c=getchar())>10;w=c);putchar(w);}
