@@ -68,15 +68,16 @@ int main() {
 		for (size_t i = 0; i < n; i++) {
 			size_t id = sccId[i];
 			for (auto next : map[i]) {
-				if (sccId[next] != id) onlyIn[id] = onlyOut[sccId[next]] = false;
+				if (sccId[next] != id) {
+					onlyIn[id] = false;
+					onlyOut[sccId[next]] = false;
+				}
 			}
 		}
 		
 		size_t inCnt = 0, outCnt = 0;
-		for (size_t i = 0; i < n; i++) {
-			if (onlyIn[i] && i == sccId[i]) inCnt++;
-			if (onlyOut[i] && i == sccId[i]) outCnt++;
-		}
+		for (size_t i = 0; i < n; i++) if (onlyIn[i] && i == sccId[i]) inCnt++;
+		for (size_t i = 0; i < n; i++) if (onlyOut[i] && i == sccId[i])outCnt++;
 		printf("%zu\n", sccCount == 1 ? 0 : max(outCnt, inCnt));
 	}
 }
