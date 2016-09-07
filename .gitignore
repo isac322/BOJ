@@ -215,5 +215,6 @@ ModelManifest.xml
 
 .idea/*
 .git*
-*/9999.*
+*/1237/*
+*/9999/*
 *.VC.db
