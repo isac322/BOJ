@@ -213,6 +213,7 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
+.idea/*
 .git*
 */9999.*
 *.VC.db
