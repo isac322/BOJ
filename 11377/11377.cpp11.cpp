@@ -1,6 +1,6 @@
+#include <cstdio>
 #include <queue>
 #include <limits>
-#include <cstdio>
 #include <vector>
 #include <algorithm>
 
@@ -87,18 +87,27 @@ namespace HopcroftKarp {
 }
 
 int main() {
-	size_t n, m, p, a;
-	scanf("%zu%zu", &n, &m);
+	size_t n, m, k, t, a;
+	scanf("%zu%zu%zu", &n, &m, &k);
+	q = n;
 	vector<vector<size_t>> graph(n + 1);
 
-    q = n;
 	for (size_t i = 1; i <= n; i++) {
-		scanf("%zu", &p);
-		while (p--) {
+		scanf("%zu", &t);
+		while (t--) {
 			scanf("%zu", &a);
 			graph[i].emplace_back(a);
 		}
 	}
 
-	printf("%zu", HopcroftKarp::maximumMatching(graph, n + n, m));
+	HopcroftKarp::maximumMatching(graph, n + n, m);
+	size_t cnt = 0;
+	for (size_t i = 1; i <= n; i++) {
+		if (HopcroftKarp::pairL[i]) cnt++;
+		if (k && HopcroftKarp::pairL[i + n]) {
+			cnt++;
+			k--;
+		}
+	}
+	printf("%zu", cnt);
 }

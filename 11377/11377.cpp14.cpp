@@ -1,12 +1,10 @@
+#include <cstdio>
 #include <queue>
 #include <limits>
-#include <cstdio>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
-
-size_t q;
 
 namespace HopcroftKarp {
 	const size_t &INF = numeric_limits<size_t>::max();
@@ -33,7 +31,7 @@ namespace HopcroftKarp {
 
 			if (level[left] >= level[NIL]) continue;
 
-			for (size_t right : graph->at((left - 1) % q + 1)) {
+			for (size_t right : graph->at(left)) {
 				size_t prevPair = pairR[right];
 
 				if (level[prevPair] == INF) {
@@ -49,7 +47,7 @@ namespace HopcroftKarp {
 	bool dfs(size_t left) {
 		if (left == NIL) return true;
 
-		for (size_t right : graph->at((left - 1) % q + 1)) {
+		for (size_t right : graph->at(left)) {
 			size_t &traceLink = pairR[right];
 
 			if (level[traceLink] == level[left] + 1 && dfs(traceLink)) {
@@ -87,18 +85,28 @@ namespace HopcroftKarp {
 }
 
 int main() {
-	size_t n, m, p, a;
-	scanf("%zu%zu", &n, &m);
-	vector<vector<size_t>> graph(n + 1);
+	size_t n, m, k, t, a;
+	scanf("%zu%zu%zu", &n, &m, &k);
 
-    q = n;
+	vector<vector<size_t>> graph(n + n + 1);
+
 	for (size_t i = 1; i <= n; i++) {
-		scanf("%zu", &p);
-		while (p--) {
+		scanf("%zu", &t);
+		while (t--) {
 			scanf("%zu", &a);
 			graph[i].emplace_back(a);
+			graph[i + n].emplace_back(a);
 		}
 	}
 
-	printf("%zu", HopcroftKarp::maximumMatching(graph, n + n, m));
+	HopcroftKarp::maximumMatching(graph, n + n, m);
+	size_t cnt = 0;
+	for (size_t i = 1; i <= n; i++) {
+		if (HopcroftKarp::pairL[i]) cnt++;
+		if (k && HopcroftKarp::pairL[i + n]) {
+			cnt++;
+			k--;
+		}
+	}
+	printf("%zu", cnt);
 }
