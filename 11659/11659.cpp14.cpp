@@ -1,7 +1,5 @@
 #include <cstdio>
 
-using namespace std;
-
 long long arr[100'001];
 
 int main() {
