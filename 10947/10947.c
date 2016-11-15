@@ -1,1 +1,0 @@
-main(){long long a;scanf("%lld",&a);puts(!(a%7)||a%7==2?"CY":"SK");}
