@@ -30,7 +30,6 @@ int main() {
 
 	while (que.size()) {
 		const int here = que.top().second;
-		const int cost = que.top().first;
 		que.pop();
 
 		for (vector<INTP>::iterator i = map[here].begin(); i != map[here].end(); i++) {

@@ -1,50 +1,117 @@
 #include <queue>
+#include <limits>
 #include <cstdio>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
 
-vector<vector<size_t>> g;
-vector<size_t> matchLink;
-vector<bool> visit;
-size_t n, m, a, b;
+const int &INF = numeric_limits<int>::max();
 
-bool dfs(size_t node) {
-	if (visit[node]) return false;
-	visit[node] = true;
+class BipGraph {
+	int m, n;
 
-	for (auto next : g[node]) {
-		if (matchLink[next] == n || dfs(matchLink[next])) {
-			matchLink[next] = node;
-			return true;
+	vector<int> *adj;
+
+	int *pairU, *pairV, *dist;
+	int NIL;
+
+public:
+	BipGraph(int m, int n);
+	void addEdge(int u, int v);
+
+	bool bfs();
+
+	bool dfs(int u);
+
+	int hopcroftKarp();
+};
+
+int BipGraph::hopcroftKarp() {
+	pairU = new int[m];
+	pairV = new int[n];
+	dist = new int[m + 1];
+
+	for (int u = 0; u < m; u++) pairU[u] = NIL;
+	for (int v = 0; v < n; v++) pairV[v] = NIL;
+
+	int result = 0;
+
+	while (bfs()) {
+		for (int u = 0; u < m; u++)
+			if (pairU[u] == NIL && dfs(u))
+				result++;
+	}
+
+	return result;
+}
+
+bool BipGraph::bfs() {
+	queue<int> Q;
+
+	for (int u = 0; u < m; u++) {
+		if (pairU[u] == NIL) {
+			dist[u] = 0;
+			Q.push(u);
+		}
+		else dist[u] = INF;
+	}
+
+	dist[NIL] = INF;
+
+	while (!Q.empty()) {
+		int u = Q.front();
+		Q.pop();
+
+		if (dist[u] < dist[NIL]) {
+			for (auto v : adj[u]) {
+				if (dist[pairV[v]] == INF) {
+					dist[pairV[v]] = dist[u] + 1;
+					Q.push(pairV[v]);
+				}
+			}
 		}
 	}
 
-	return false;
+	return (dist[NIL] != INF);
 }
 
-inline size_t maximumMatching() {
-	size_t cnt = 0;
-	for (size_t i = 0; i < n; i++) {
-		fill(visit.begin(), visit.end(), false);
-		if (dfs(i)) cnt++;
-	}
+bool BipGraph::dfs(int u) {
+	if (u != NIL) {
+		for (auto v : adj[u]) {
+			if (dist[pairV[v]] == dist[u] + 1) {
+				if (dfs(pairV[v]) == true) {
+					pairV[v] = u;
+					pairU[u] = v;
+					return true;
+				}
+			}
+		}
 
-	return cnt;
+		dist[u] = INF;
+		return false;
+	}
+	return true;
+}
+
+BipGraph::BipGraph(int m, int n) {
+	NIL = this->m = m;
+	this->n = n;
+	adj = new vector<int>[m];
+}
+
+void BipGraph::addEdge(int u, int v) {
+	adj[u].push_back(v);
 }
 
 int main() {
-	scanf("%zu%zu", &n, &m);
-	g.resize(n);
-	visit.resize(n);
-	matchLink.resize(n, n);
-
-	for (size_t i = 0; i < m; i++) {
-		scanf("%zu%zu", &a, &b);
+	int n, m, a, b;
+	scanf("%d%d", &n, &m);
+	BipGraph graph(n, n);
+	for (int i = 0; i < m; i++) {
+		scanf("%d%d", &a, &b);
 		a--, b--;
-		g[a].emplace_back(b);
+		graph.addEdge(a, b);
 	}
-
-	printf("%zu", maximumMatching());
+	printf("%d", graph.hopcroftKarp());
 }

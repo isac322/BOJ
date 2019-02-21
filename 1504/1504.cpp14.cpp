@@ -27,8 +27,7 @@ int dijkstra(int src, int last) {
 		que.pop();
 		if (here == last) break;
 
-		const auto &end = map[here].end();
-		for (auto i : map[here]) {
+		for (auto &i : map[here]) {
 			if (dist[i.first] > dist[here] + i.second) {
 				dist[i.first] = dist[here] + i.second;
 				que.emplace(dist[i.first], i.first);

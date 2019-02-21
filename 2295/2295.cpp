@@ -1,12 +1,12 @@
 #include <cstdio>
 #include <algorithm>
-#include <tr1/unordered_set>
+#include <tr1/unordered_map>
 
 using namespace std;
 using namespace std::tr1;
 
 int n, arr[1000];
-unordered_set<int> set;
+unordered_map<int, int> map;
 
 int main() {
 	int m = 0;
@@ -16,16 +16,16 @@ int main() {
 		int &num = arr[i];
 		scanf("%d", &num);
 
-		for (int j = 0; j <= i; j++) set.insert(num + arr[j]);
+		for (int j = 0; j <= i; j++) map[num + arr[j]] = true;
 
 		for (int j = 0; j < i; j++) {
-			unordered_set<int>::iterator iter = set.find(num - arr[j]);
-			if (iter != set.end()) {
+			unordered_map<int, int>::iterator iter = map.find(num - arr[j]);
+			if (iter != map.end()) {
 				m = max(m, num);
 				break;
 			}
 		}
 	}
 
-	printf("%d\n", m);
+	printf("%d", m);
 }

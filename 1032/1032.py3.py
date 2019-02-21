@@ -1,8 +1,6 @@
-t = []
 s = ""
 le = int(input())
-for i in range(le):
-    t.append(input())
+t = [input() for _ in range(le)] 
 for ii in range(len(t[0])):
     b = True
     for i in range(le):

@@ -73,14 +73,14 @@ int main() {
 			for (auto next : map[i]) if (sccId[next] != id) onlyOut[sccId[next]] = false;
 		}
 		
-		size_t root = n + 1;
+		size_t root;
 		for (size_t i = 0; i < n; i++) {
 			if (onlyOut[i] && sccId[i] == i) {
 				root = i;
 				break;
 			}
 		}
-		if (root != n + 1) dfs(root);
+		dfs(root);
 		
 		bool check = true;
 		for (size_t i = 0; i < n; i++) {

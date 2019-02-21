@@ -1,7 +1,7 @@
-#include <stdio.h>
+#include <cstdio>
 
 int main() {
-    int n, t, max = 0, min = 1000001;
+    int n, t, max = -1'000'001, min = 1'000'001;
     scanf("%d", &n);
 
     for (int i = 0; i < n; ++i) {

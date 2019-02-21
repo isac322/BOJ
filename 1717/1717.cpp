@@ -8,7 +8,7 @@ int find(int n) {
 	else return p = find(p);
 }
 
-void uni(int p, int q) {
+inline void uni(int p, int q) {
 	p = find(p);
 	q = find(q);
 	if (p == q) return;

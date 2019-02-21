@@ -30,6 +30,7 @@ int main() {
 
 	while (que.size()) {
 		const int here = que.top().second;
+		const int cost = que.top().first;
 		que.pop();
 
 		for (auto &i : map[here]) {

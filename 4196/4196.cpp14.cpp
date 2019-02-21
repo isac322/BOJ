@@ -4,9 +4,10 @@
 
 using namespace std;
 
-vector<size_t> map[100000], revMap[100000], topological;
+vector<vector<size_t>> map, revMap;
+vector<size_t> sccId, topological;
 vector<bool> visit;
-size_t n, current, sccId[100000];
+size_t n, current;
 size_t m, t, a, b;
 
 void topologicalSort(size_t idx) {
@@ -28,6 +29,7 @@ void makeSCC(size_t idx) {
 
 inline void SCC() {
 	topological.clear();
+	sccId.resize(n);
 	visit.resize(n, false);
 	
 	for (size_t i = 0; i < n; i++) topologicalSort(i);
@@ -38,15 +40,18 @@ inline void SCC() {
 	}
 }
 
-bool onlyIn[100000];
+vector<bool> onlyIn;
 
 int main() {
 	scanf("%zu", &t);
 	while (t--) {
 		scanf("%zu%zu", &n, &m);
 		
+		map.resize(n);
+		revMap.resize(n);
 		for (size_t i = 0; i < n; i++) map[i].clear(), revMap[i].clear();
-		fill_n(onlyIn, n, true);
+		onlyIn.resize(n);
+		fill(onlyIn.begin(), onlyIn.end(), true);
 		
 		while (m--) {
 			scanf("%zu%zu", &a, &b);

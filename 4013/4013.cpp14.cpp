@@ -12,7 +12,7 @@ vector<bool> SCCrest, visit, SCCdp;
 vector<vector<int> > adj;
 
 vector<int> sccId;
-vector<int> discovered, finished, SCCatm;
+vector<int> discovered/*scc atm*/, finished/*scc dfs dp*/;
 
 int *atm;
 
@@ -63,7 +63,7 @@ bool atmDFS(int id) {
 	}
 
 	if (!check) finished[id] = 0;
-	else finished[id] = num + SCCatm[id];
+	else finished[id] = num + discovered[id];
 
 	return SCCdp[id] = check;
 }
@@ -82,11 +82,12 @@ int main() {
 	tarjanSCC();
 
 	SCCgraph.resize(sccCounter);
-	SCCatm.resize(sccCounter, 0);
+	discovered.resize(sccCounter);
+	fill(discovered.begin(), discovered.end(), 0);
 
 	for (int i = 0; i < n; i++) {
 		auto &vec = SCCgraph[sccId[i]];
-		SCCatm[sccId[i]] += atm[i];
+		discovered[sccId[i]] += atm[i];
 		for (auto v : adj[i]) {
 			if (sccId[i] != sccId[v]) vec.emplace(sccId[v]);
 		}

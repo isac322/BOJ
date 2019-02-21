@@ -20,6 +20,7 @@ int main() {
 	int k;
 	scanf("%d%d", &n, &k);
 	dp[0][0] = 1;
+	fill_n(dp[0] + 1, n + 1, 0);
 	fill_n(dp[1], n + 1, 1);
 	for (int i = 2; i <= k; i++) fill_n(dp[i], n + 1, -1);
 	printf("%d", solve(n, k));

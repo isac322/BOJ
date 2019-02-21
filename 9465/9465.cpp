@@ -8,7 +8,7 @@
 using namespace std;
 
 int n;
-char stiker[2][100000];
+short stiker[2][100000];
 int dp[100000][3];
 
 int solve(int start, int prev) {
@@ -37,10 +37,10 @@ int main() {
 
 	while (t--) {
 		scanf("%d", &n);
-		for (int i = 0; i < n; i++) scanf("%hhd", stiker[0] + i);
+		for (int i = 0; i < n; i++) scanf("%hd", stiker[0] + i);
 		for (int i = 0; i < n; i++) {
 			fill_n(dp[i], 3, -1);
-			scanf("%hhd", stiker[1] + i);
+			scanf("%hd", stiker[1] + i);
 		}
 
 		printf("%d\n", solve(0, NONE));

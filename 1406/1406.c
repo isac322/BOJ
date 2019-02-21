@@ -7,17 +7,16 @@ typedef struct NODE {
 	struct NODE *next;
 }Node;
 
-Node *head, *tail, *current, *ne, *av;
-int count = 0;
+Node *head, *tail, *current, *ne;
 
 int main() {
-	head = (Node *) malloc(sizeof(Node));
-	current = tail = (Node *) malloc(sizeof(Node));
+	head = (Node *) calloc(1, sizeof(Node));
+	current = tail = (Node *) calloc(1, sizeof(Node));
 	head->next = tail;
 	tail->prev = head;
 	char t, in[5];
 	while ((t = getchar()) != 10) {
-		ne = (Node *) malloc(sizeof(Node));
+		ne = (Node *) calloc(1, sizeof(Node));
 		ne->data = t;
 		ne->next = current;
 		ne->prev = current->prev;
@@ -30,11 +29,7 @@ int main() {
 		gets(in);
 		switch (in[0]) {
 			case 'P':
-				if (count) {
-					ne = av;
-					av = av->next;
-					count--;
-				} else ne = (Node *) malloc(sizeof(Node));
+				ne = (Node *) calloc(1, sizeof(Node));
 				ne->data = in[2];
 				ne->next = current;
 				ne->prev = current->prev;
@@ -52,12 +47,10 @@ int main() {
 					ne = current->prev;
 					ne->prev->next = current;
 					current->prev = current->prev->prev;
-					count++;
-					ne->next = av;
-					av = ne;
+					free(ne);
 				}
 				break;
 		}
 	}
-	for (current = head->next; current != tail; current = current->next) putchar(current->data);
+	for (current = head->next; current != tail; current = current->next) printf("%c", current->data);
 }

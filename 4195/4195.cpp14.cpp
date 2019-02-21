@@ -1,10 +1,11 @@
 #include <cstdio>
 #include <string>
+#include <vector>
 #include <unordered_map>
 
 using namespace std;
 
-int parent[200000], sizes[200000];
+vector<int> parent, sizes;
 
 int find(int n) {
 	int &p = parent[n];
@@ -26,8 +27,8 @@ unordered_map<string, int> map;
 inline int testNadd(const char *s) {
 	auto p = map.find(s);
 	if (p == map.end()) {
-		parent[cnt] = cnt;
-		sizes[cnt] = 1;
+		parent.emplace_back(cnt);
+		sizes.emplace_back(1);
 		map.emplace(s, cnt);
 		return cnt++;
 	}
@@ -42,6 +43,8 @@ int main() {
 	while (t--) {
 		scanf("%d", &n);
 		map.clear();
+		sizes.clear();
+		parent.clear();
 		cnt = 0;
 
 		for (int i = 0; i < n; i++) {

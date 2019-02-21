@@ -6,118 +6,97 @@
 
 using namespace std;
 
-const int &INF = numeric_limits<int>::max();
-#define NIL 0
+namespace HopcroftKarp {
+	using namespace std;
 
-class BipGraph {
-	int m, n;
+	const size_t &INF = numeric_limits<size_t>::max();
+	vector<size_t> pairL, pairR, level;
+	queue<size_t> que;
+	const vector<vector<size_t>> *graph;
+	size_t nL, NIL, totalMatching;
 
-	vector<int> *adj;
-
-	int *pairU, *pairV, *dist;
-
-public:
-	BipGraph(int m, int n);
-	void addEdge(int u, int v);
-
-	bool bfs();
-
-	bool dfs(int u);
-
-	int hopcroftKarp();
-};
-
-int BipGraph::hopcroftKarp() {
-	pairU = new int[m + 1];
-	pairV = new int[n + 1];
-	dist = new int[m + 1];
-
-	for (int u = 0; u <= m; u++) pairU[u] = NIL;
-	for (int v = 0; v <= n; v++) pairV[v] = NIL;
-
-	int result = 0;
-
-	while (bfs()) {
-		for (int u = 1; u <= m; u++)
-			if (pairU[u] == NIL && dfs(u))
-				result++;
-	}
-
-	return result;
-}
-
-bool BipGraph::bfs() {
-	queue<int> Q;
-
-	for (int u = 1; u <= m; u++) {
-		if (pairU[u] == NIL) {
-			dist[u] = 0;
-			Q.push(u);
+	inline bool bfs() {
+		for (size_t left = 0; left < nL; left++) {
+			if (pairL[left] == NIL) {
+				level[left] = 0;
+				que.emplace(left);
+			}
+			else level[left] = INF;
 		}
-		else dist[u] = INF;
-	}
+		level[NIL] = INF;
 
-	dist[NIL] = INF;
+		while (que.size()) {
+			size_t left = que.front();
+			que.pop();
 
-	while (!Q.empty()) {
-		int u = Q.front();
-		Q.pop();
+			if (level[left] >= level[NIL]) continue;
 
-		if (u == NIL) continue;
-			for (auto i = adj[u].begin(); i != adj[u].end(); ++i) {
-				int v = *i;
+			for (size_t right : graph->at(left)) {
+				size_t prevPair = pairR[right];
 
-				if (dist[pairV[v]] == INF) {
-					dist[pairV[v]] = dist[u] + 1;
-					Q.push(pairV[v]);
-				}
-			
-		}
-	}
-
-	return (dist[NIL] != INF);
-}
-
-bool BipGraph::dfs(int u) {
-	if (u != NIL) {
-		for (auto i = adj[u].begin(); i != adj[u].end(); ++i) {
-			int v = *i;
-
-			if (dist[pairV[v]] == dist[u] + 1) {
-				if (dfs(pairV[v]) == true) {
-					pairV[v] = u;
-					pairU[u] = v;
-					return true;
+				if (level[prevPair] == INF) {
+					level[prevPair] = level[left] + 1;
+					que.emplace(prevPair);
 				}
 			}
 		}
 
-		dist[u] = INF;
+		return level[NIL] != INF;
+	}
+
+	bool dfs(size_t left) {
+		if (left == NIL) return true;
+
+		for (size_t right : graph->at(left)) {
+			size_t &traceLink = pairR[right];
+
+			if (level[traceLink] == level[left] + 1 && dfs(traceLink)) {
+				traceLink = left;
+				pairL[left] = right;
+				return true;
+			}
+		}
+
+		level[left] = INF;
 		return false;
 	}
-	return true;
-}
 
-BipGraph::BipGraph(int m, int n) {
-	this->m = m;
-	this->n = n;
-	adj = new vector<int>[m + 1];
-}
+	size_t maximumMatching(const vector<vector<size_t>> &graph, size_t n, size_t m) {
+		HopcroftKarp::graph = &graph;
+		nL = n;
 
-void BipGraph::addEdge(int u, int v) {
-	adj[u].push_back(v);
+		NIL = n + 10;
+		level.resize(NIL + 1);
+		pairL.resize(n);
+		fill(pairL.begin(), pairL.end(), NIL);
+		pairR.resize(m);
+		fill(pairR.begin(), pairR.end(), NIL);
+		totalMatching = 0;
+
+		while (bfs()) {
+			for (size_t left = 0; left < n; left++) {
+				if (pairL[left] == NIL && dfs(left)) {
+					totalMatching++;
+				}
+			}
+		}
+
+		return totalMatching;
+	}
 }
 
 int main() {
-	int n, m, a, t;
-	scanf("%d%d", &n, &m);
-	BipGraph graph(n, m);
-	for (int i = 1; i <= n; i++) {
-		scanf("%d", &t);
+	size_t n, m, t, a;
+	scanf("%zu%zu", &n, &m);
+	vector<vector<size_t>> graph(n);
+
+	for (size_t i = 0; i < n; i++) {
+		scanf("%zu", &t);
 		while (t--) {
-			scanf("%d", &a);
-			graph.addEdge(i, a);
+			scanf("%zu", &a);
+			graph[i].emplace_back(--a);
 		}
 	}
-	printf("%d", graph.hopcroftKarp());
+
+	printf("%zu", HopcroftKarp::maximumMatching(graph, n, m));
 }

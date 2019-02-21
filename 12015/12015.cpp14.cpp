@@ -5,14 +5,14 @@
 using namespace std;
 
 int main() {
-	int n, t;
-	vector<int> arr;
-	scanf("%d", &n);
+	unsigned long n, t;
+	vector<unsigned long> arr;
+	scanf("%lu", &n);
 	for (int i = 0; i < n; i++) {
-		scanf("%d", &t);
+		scanf("%lu", &t);
 		auto iter = lower_bound(arr.begin(), arr.end(), t);
 		if (iter == arr.end()) arr.emplace_back(t);
 		else *iter = t;
 	}
-	printf("%d", arr.size());
+	printf("%lu", arr.size());
 }

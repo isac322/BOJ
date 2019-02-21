@@ -2,7 +2,7 @@
 #include <memory.h>
 
 bool mat[50][50] = { 0 };
-int n, m, k, i, j, y, x, t, cnt;
+int n, m, k;
 
 void re(int i, int j) {
 	mat[i][j] = 0;
@@ -14,11 +14,13 @@ void re(int i, int j) {
 }
 
 int main() {
+	int t;
 	scanf("%d", &t);
 	while (t--) {
 		memset(mat, 0, 2500);
+		int i = 0, j, y, x, cnt = 0;
 		scanf("%d %d %d", &m, &n, &k);
-		for (cnt = i = 0; i < k; i++) {
+		for (; i < k; i++) {
 			scanf("%d %d", &x, &y);
 			mat[y][x] = 1;
 		}

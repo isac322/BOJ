@@ -1,25 +1,13 @@
 #include <stdio.h>
 #include <algorithm>
+#include <bitset>
 
 using namespace std;
-
-int n;
-
-inline bool test(int pos) {
-	return (n >> pos) & 1;
-}
-
-inline void add(int pos) {
-	n |= 1 << pos;
-}
-
-inline void remove(int pos) {
-	n &= ~(1 << pos);
-}
 
 int main() {
 	char str[9];
 	int m, d;
+	bitset<20> set;
 	scanf("%d", &m);
 
 	for (int i = 0; i < m; i++) {
@@ -29,24 +17,24 @@ int main() {
 			case 'a':
 				if (str[1] == 'd') {
 					scanf("%d", &d);
-					add(d);
+					set.set(d - 1);
 				}
-				else n = -1;
+				else set.set();
 				break;
 			case 'c':
 				scanf("%d", &d);
-				puts(test(d) ? "1" : "0");
+				puts(set.test(d - 1) ? "1" : "0");
 				break;
 			case 'e':
-				n = 0;
+				set.reset();
 				break;
 			case 't':
 				scanf("%d", &d);
-				n ^= 1 << d;
+				set.flip(d - 1);
 				break;
 			case 'r':
 				scanf("%d", &d);
-				remove(d);
+				set.reset(d - 1);
 		}
 	}
 }

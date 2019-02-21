@@ -7,28 +7,27 @@ int dp[1000000][2] = { 0 };
 bool visit[1000000][2] = { false };
 
 int calc(int index, int sel, int paren) {
-	int i = 0, len = tree[index].size(), a, b, sum = 0, j;
+	int i = 0, len = tree[index].size(), a, b, sum = 0;
 	if (sel == 0) {
 		for (; i < len; i++) {
-			j = tree[index][i];
-			if (j != paren) {
-				a = visit[j][1] ? dp[j][1] : calc(j, 1, index);
+			if (tree[index][i] != paren) {
+				a = visit[tree[index][i]][1] ? dp[tree[index][i]][1] : calc(tree[index][i], 1, index);
 				sum += a;
 			}
 		}
 	} else {
 		for (; i < len; i++) {
-			j = tree[index][i];
 			if (tree[index][i] != paren) {
-				a = visit[j][1] ? dp[j][1] : calc(j, 1, index);
-				b = visit[j][0] ? dp[j][0] : calc(j, 0, index);
+				a = visit[tree[index][i]][1] ? dp[tree[index][i]][1] : calc(tree[index][i], 1, index);
+				b = visit[tree[index][i]][0] ? dp[tree[index][i]][0] : calc(tree[index][i], 0, index);
 				sum += a > b ? b : a;
 			}
 		}
 		sum++;
 	}
+	dp[index][sel] = sum;
 	visit[index][sel] = true;
-	return dp[index][sel] = sum;
+	return dp[index][sel];
 }
 
 int main() {

@@ -8,6 +8,7 @@ int post[100000], match[100001];
 void solve(int root_pos, int length, int start, int fix) {
 	if (length < 1 || root_pos < start) return;
 	printf("%d ", post[root_pos], root_pos);
+	if (length == 1) return;
 
 	const int &pos = match[post[root_pos]] - fix;
 	solve(pos - 1, pos - start, start, fix);

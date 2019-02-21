@@ -1,70 +1,65 @@
 #include <iostream>
-#include <vector>
-#include <string>
-#include <limits>
 #include <algorithm>
+#include <string>
+#include <vector>
 
 using namespace std;
 
-const size_t &INF = numeric_limits<size_t>::max();
+vector<int> failure;
+vector<size_t> mached;
 
-vector<size_t> failure;
-vector<size_t> matched;
+void buildTable(string &w) {
+	failure.resize(w.size());
 
-void initFailure(const string &pattern) {
-	const size_t &len = pattern.size();
+	int i = 2, j = 0;
+	failure[0] = -1;
+	failure[1] = 0;
 
-	failure.resize(len);
-	fill(failure.begin(), failure.end(), 0);
-
-	size_t index = 0;
-	for (size_t i = 1; i < len; i++) {
-		if (pattern[i] == pattern[index]) {
-			failure[i] = ++index;
+	while (i < w.length()) {
+		if (w[i - 1] == w[j]) {
+			failure[i] = j + 1;
+			i++;
+			j++;
 		}
-		else if (index != 0) {
-			index = failure[index - 1];
-
-			i--;
+		else if (j > 0) j = failure[j];
+		else {
+			failure[i] = 0;
+			i++;
 		}
 	}
 }
 
-vector<size_t> &KMP_all(const string &target, const string &pattern) {
-	initFailure(pattern);
-	matched.clear();
+void KMP(string &s, string &w) {
+	int m = 0, i = 0;
 
-	const size_t &len = target.size(), &last = pattern.size();
-	size_t index = 0;
+	buildTable(w);
+	while (m + i < s.length()) {
+		if (w[i] == s[m + i]) {
+			i++;
+			if (i == w.length()) {
+				mached.emplace_back(m);
 
-	for (size_t i = 0; i < len; i++) {
-		if (target[i] == pattern[index]) {
-			index++;
-
-			if (index == last) {
-				matched.emplace_back(i - index + 1);
-
-				index = failure.back();
+				i--;
+				m += i - failure[i];
+				i = failure[i];
 			}
 		}
-		else if (index != 0) {
-			index = failure[index - 1];
-
-			i--;
+		else {
+			m += i - failure[i];
+			if (i > 0) i = failure[i];
 		}
 	}
-
-	return matched;
 }
+
 
 int main() {
 	string t, p;
 	getline(cin, t);
 	getline(cin, p);
 
-	KMP_all(t, p);
-	cout << matched.size() << '\n';
-	for (auto d : matched) {
+	KMP(t, p);
+	cout << mached.size() << '\n';
+	for (auto d : mached) {
 		cout << d + 1 << ' ';
 	}
 }

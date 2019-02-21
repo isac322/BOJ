@@ -17,7 +17,7 @@ int main() {
 
 		int cnt = 1;
 		int pivot = arr[0].second;
-		for(int i = 1; i < n; i++) {
+		for(int i = 1; i < n && pivot != 1; i++) {
 			if(arr[i].second < pivot) {
 				cnt++;
 				pivot = arr[i].second;

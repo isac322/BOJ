@@ -6,108 +6,87 @@
 
 using namespace std;
 
-size_t q;
+const size_t &INF = numeric_limits<size_t>::max();
 
-namespace HopcroftKarp {
-	const size_t &INF = numeric_limits<size_t>::max();
-	const size_t &NIL = 0;
+size_t traceLink[2003], flow[2003][2003];
 
-	vector<size_t> pairL, pairR, level;
-	queue<size_t> que;
-	const vector<vector<size_t>> *graph;
-	size_t n, totalMatching;
+vector<size_t> graph[2003];
+deque<size_t> que;
+size_t V;
 
-	inline bool bfs() {
-		for (size_t left = 1; left <= n; left++) {
-			if (pairL[left] == NIL) {
-				level[left] = 0;
-				que.emplace(left);
-			}
-			else level[left] = INF;
-		}
-		level[NIL] = INF;
+size_t edmondsKarp() {
+	que.clear();
+	size_t totalFlow = 0;
 
-		while (que.size()) {
-			size_t left = que.front();
-			que.pop();
+	while (true) {
+		que.clear();
+		fill_n(traceLink, V, V);
+		traceLink[0] = 0;
 
-			if (level[left] >= level[NIL]) continue;
+		que.emplace_back(0);
 
-			for (size_t right : graph->at((left - 1) % q + 1)) {
-				size_t prevPair = pairR[right];
+		while (!que.empty()) {
+			size_t here = que.front();
+			if (here == V - 2) break;
+			que.pop_front();
 
-				if (level[prevPair] == INF) {
-					level[prevPair] = level[left] + 1;
-					que.emplace(prevPair);
+			for (size_t there : graph[here]) {
+				if (flow[here][there] > 0 && traceLink[there] == V) {
+					que.emplace_back(there);
+					traceLink[there] = here;
 				}
 			}
 		}
 
-		return level[NIL] != INF;
-	}
+		if (traceLink[V - 2] == V) break;
 
-	bool dfs(size_t left) {
-		if (left == NIL) return true;
-
-		for (size_t right : graph->at((left - 1) % q + 1)) {
-			size_t &traceLink = pairR[right];
-
-			if (level[traceLink] == level[left] + 1 && dfs(traceLink)) {
-				traceLink = left;
-				pairL[left] = right;
-				return true;
-			}
+		size_t amount = INF;
+		for (size_t u = V - 2; u != 0; u = traceLink[u]) {
+			size_t &v = traceLink[u];
+			amount = min(amount, flow[v][u]);
 		}
 
-		level[left] = INF;
-		return false;
-	}
-
-	size_t maximumMatching(const vector<vector<size_t>> &graph, size_t n, size_t m) {
-		HopcroftKarp::graph = &graph;
-		HopcroftKarp::n = n;
-
-		level.resize(n + 1);
-		pairL.resize(n + 1);
-		fill(pairL.begin(), pairL.end(), NIL);
-		pairR.resize(m + 1);
-		fill(pairR.begin(), pairR.end(), NIL);
-		totalMatching = 0;
-
-		while (bfs()) {
-			for (size_t left = 1; left <= n; left++) {
-				if (pairL[left] == NIL && dfs(left)) {
-					totalMatching++;
-				}
-			}
+		for (size_t u = V - 2; u != 0; u = traceLink[u]) {
+			size_t &v = traceLink[u];
+			flow[v][u] -= amount;
+			flow[u][v] += amount;
 		}
 
-		return totalMatching;
+		totalFlow += amount;
 	}
+
+	return totalFlow;
 }
 
 int main() {
-	size_t n, m, k, t, a;
+	size_t n, m, k;
 	scanf("%zu%zu%zu", &n, &m, &k);
-	q = n;
-	vector<vector<size_t>> graph(n + 1);
 
+	size_t t, a;
 	for (size_t i = 1; i <= n; i++) {
+		graph[0].emplace_back(i);
+		graph[i].emplace_back(0);
+		graph[n + m + 2].emplace_back(i);
+		graph[i].emplace_back(n + m + 2);
+		flow[0][i] = flow[n + m + 2][i] = 1;
 		scanf("%zu", &t);
 		while (t--) {
 			scanf("%zu", &a);
-			graph[i].emplace_back(a);
+			graph[i].emplace_back(a + n);
+			graph[a + n].emplace_back(i);
+			flow[i][a + n] = 1;
 		}
+	}
+	graph[0].emplace_back(n + m + 2);
+	graph[n + m + 2].emplace_back(0);
+	flow[0][n + m + 2] = k;
+	for (size_t i = 1; i <= m; i++) {
+		graph[i + n].emplace_back(n + m + 1);
+		graph[n + m + 1].emplace_back(i + n);
+		flow[i + n][n + m + 1] = 1;
 	}
 
-	HopcroftKarp::maximumMatching(graph, n + n, m);
-	size_t cnt = 0;
-	for (size_t i = 1; i <= n; i++) {
-		if (HopcroftKarp::pairL[i]) cnt++;
-		if (k && HopcroftKarp::pairL[i + n]) {
-			cnt++;
-			k--;
-		}
-	}
-	printf("%zu", cnt);
+	V = m + n + 3;
+
+	printf("%zu", edmondsKarp());
 }

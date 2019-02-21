@@ -12,8 +12,8 @@ int main() {
 	for (int k = 0; k < n; k++) {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				inMap[i][j] = inMap[i][j] | (inMap[i][k] & inMap[k][j]);
-				outMap[i][j] = outMap[i][j] | (outMap[i][k] & outMap[k][j]);
+				inMap[i][j] |= inMap[i][k] & inMap[k][j];
+				outMap[i][j] |= outMap[i][k] & outMap[k][j];
 			}
 		}
 	}

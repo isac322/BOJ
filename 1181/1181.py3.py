@@ -1,5 +1,5 @@
 n = int(input())
-l = []
+l = set()
 for i in range(n):
-    l.append(input())
-print("\n".join(sorted(set(l), key = lambda i : [len(i), i])))
+    l.add(input())
+print("\n".join(sorted(l, key = lambda i : [len(i), i])))

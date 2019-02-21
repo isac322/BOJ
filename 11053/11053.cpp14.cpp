@@ -3,15 +3,25 @@
 
 using namespace std;
 
-short n, dp1[1000], arr[1000], m = 0;
+short n, dp[1000], arr[1000], m = 0;
+
+short solve(short index) {
+	short &p = dp[index];
+	if (p) return p;
+
+	short t;
+	for (short i = index - 1; i >= 0; i--) {
+		t = solve(i);
+		if (arr[i] < arr[index]) p = max(p, t);
+	}
+
+	m = max(m, ++p);
+	return p;
+}
 
 int main() {
 	scanf("%hd", &n);
-	for (short i = 0; i < n; i++) scanf("%hd", arr + i);
-	dp1[0] = 1;
-	for (short i = 1; i < n; i++) {
-		for (short j = i - 1; j >= 0; j--) if (arr[i] > arr[j]) dp1[i] = max(dp1[i], dp1[j]);
-		m = max(++dp1[i], m);
-	}
+	for (int i = 0; i < n; i++) scanf("%hd", arr + i);
+	solve(n - 1);
 	printf("%hd", m);
 }

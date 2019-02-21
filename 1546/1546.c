@@ -13,5 +13,5 @@ main(){
 			max=num[i];
 		sum+=num[i++];
 	}
-	printf("%0.2lf",sum/b/max*100);
+	printf("%lf",sum/b/max*100);
 }
